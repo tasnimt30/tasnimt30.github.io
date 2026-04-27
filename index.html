@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Jarin Tasnim</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #C9A96E;
+    --gold-light: #E8D5B0;
+    --cream: #F9F5EE;
+    --dark: #0E0E0E;
+    --dark2: #1A1A1A;
+    --dark3: #252525;
+    --muted: #888;
+    --border: rgba(201,169,110,0.25);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--dark);
+    color: #E8E0D0;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(14,14,14,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 300; letter-spacing: 0.15em;
+    color: var(--gold);
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace; font-size: 0.68rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 0 3rem 5rem;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 80% 30%, rgba(201,169,110,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: linear-gradient(var(--gold) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--gold) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace; font-size: 0.68rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block;
+    width: 40px; height: 1px; background: var(--gold); opacity: 0.6;
+  }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 9vw, 7.5rem);
+    font-weight: 300; line-height: 0.92;
+    letter-spacing: -0.01em;
+    color: #F2EAD8;
+    margin-bottom: 1.5rem;
+  }
+  .hero-name em { font-style: italic; color: var(--gold); }
+  .hero-desc {
+    max-width: 520px;
+    font-size: 0.95rem; font-weight: 300; line-height: 1.8;
+    color: #AAA; margin-bottom: 2.5rem;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 0.8rem;
+    border: 1px solid var(--gold);
+    padding: 0.75rem 1.8rem;
+    font-family: 'DM Mono', monospace; font-size: 0.68rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+  }
+  .hero-cta:hover { background: var(--gold); color: var(--dark); }
+  .hero-cta .arrow { font-size: 0.8rem; }
+
+  /* SECTION BASE */
+  section { padding: 6rem 3rem; border-bottom: 1px solid var(--border); }
+  .section-label {
+    font-family: 'DM Mono', monospace; font-size: 0.62rem;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-label::after {
+    content: ''; flex: 1; max-width: 60px; height: 1px;
+    background: var(--gold); opacity: 0.5;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3rem); font-weight: 300;
+    line-height: 1.1; color: #F2EAD8; margin-bottom: 3rem;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .about-text p { font-size: 0.95rem; line-height: 1.9; color: #AAA; margin-bottom: 1.2rem; font-weight: 300; }
+  .about-text p strong { color: #E8E0D0; font-weight: 400; }
+  .about-stats { display: flex; flex-direction: column; gap: 1.5rem; }
+  .stat-item {
+    border-left: 1px solid var(--gold);
+    padding-left: 1.5rem;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem; font-weight: 300; color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); margin-top: 0.3rem;
+  }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+  .skill-category {
+    border: 1px solid var(--border);
+    padding: 1.5rem;
+    background: var(--dark2);
+    position: relative;
+    transition: border-color 0.3s;
+  }
+  .skill-category:hover { border-color: rgba(201,169,110,0.5); }
+  .skill-cat-label {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag {
+    font-family: 'DM Mono', monospace; font-size: 0.62rem;
+    letter-spacing: 0.08em; padding: 0.35rem 0.7rem;
+    border: 1px solid rgba(201,169,110,0.2);
+    color: #AAA;
+  }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid; grid-template-columns: 160px 1fr;
+    gap: 2rem; padding: 2rem 0;
+    border-bottom: 1px solid rgba(201,169,110,0.12);
+  }
+  .exp-item:first-child { padding-top: 0; }
+  .exp-date {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.1em; color: var(--muted);
+    padding-top: 0.2rem;
+  }
+  .exp-content {}
+  .exp-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; font-weight: 400; color: #F2EAD8;
+    margin-bottom: 0.25rem;
+  }
+  .exp-company {
+    font-family: 'DM Mono', monospace; font-size: 0.62rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.8rem;
+  }
+  .exp-desc { font-size: 0.88rem; line-height: 1.8; color: #888; font-weight: 300; }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .project-card {
+    border: 1px solid var(--border);
+    background: var(--dark2);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+    cursor: default;
+  }
+  .project-card:hover { transform: translateY(-4px); border-color: rgba(201,169,110,0.5); }
+  .project-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; font-weight: 300;
+    color: rgba(201,169,110,0.1); line-height: 1;
+    position: absolute; top: 1rem; right: 1.5rem;
+  }
+  .project-tag {
+    font-family: 'DM Mono', monospace; font-size: 0.58rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+  .project-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 400; color: #F2EAD8;
+    line-height: 1.2; margin-bottom: 0.8rem;
+  }
+  .project-desc { font-size: 0.84rem; line-height: 1.8; color: #777; font-weight: 300; }
+
+  /* CONTACT */
+  .contact-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: start;
+  }
+  .contact-text p { font-size: 0.95rem; line-height: 1.9; color: #888; font-weight: 300; margin-bottom: 2rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem;
+    text-decoration: none; color: #AAA;
+    font-family: 'DM Mono', monospace; font-size: 0.72rem;
+    letter-spacing: 0.1em; padding: 1rem 0;
+    border-bottom: 1px solid rgba(201,169,110,0.12);
+    transition: color 0.3s;
+  }
+  .contact-link:hover { color: var(--gold); }
+  .contact-link-icon {
+    width: 32px; height: 32px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; color: var(--gold); flex-shrink: 0;
+  }
+  .contact-link-label { flex: 1; }
+  .contact-link-arrow { opacity: 0.4; font-size: 0.7rem; }
+
+  .quote-block {
+    border-left: 2px solid var(--gold);
+    padding-left: 1.5rem;
+    margin-top: 1rem;
+  }
+  .quote-block blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 300; font-style: italic;
+    color: #C9B8A0; line-height: 1.4;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 3rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem; color: var(--muted);
+  }
+  .footer-copy {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    letter-spacing: 0.12em; color: #444;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">J.T.</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-eyebrow">Electrical Engineering Student</div>
+  <h1 class="hero-name">Jarin<br><em>Tasnim</em></h1>
+  <p class="hero-desc">
+    I'm an electrical engineering student, and I'm so excited to explore all the sectors opening up to me.
+  </p>
+  <a href="#about" class="hero-cta">Explore my work <span class="arrow">↓</span></a>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">01 — About</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <h2 class="section-title">Engineer by training,<br><em>thinker</em> by nature</h2>
+      <p>
+        Welcome to my personal portfolio website! I'm <strong>Jarin Tasnim</strong>! I'm a third-year electrical engineering student at Memorial University of Newfoundland, and I love tinkering with my tools! I am passionate about all things within the art domain. I enjoy KiCAD, and occasionally coding!
+      </p>
+      <p>
+        I'm beginning to dabble in personal projects, and have a wide variety of interests, some of which I'm sharing across this site. Please feel free to check some of my attachments out, and I would more than welcome any questions, comments or suggestions you might have!
+      </p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-item">
+        <div class="stat-num">EE</div>
+        <div class="stat-label">Electrical Engineering Major</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4+</div>
+        <div class="stat-label">Projects Completed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Curiosity for the Up-and-Coming</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">02 — Skills</div>
+  <h2 class="section-title">Technical<br><em>Expertise</em></h2>
+  <div class="skills-grid">
+    <div class="skill-category">
+      <div class="skill-cat-label">Circuit Design</div>
+      <div class="skill-tags">
+        <span class="tag">Analog Circuits</span>
+        <span class="tag">PCB Design (KiCAD)</span>
+        <span class="tag">SPICE Simulation</span>
+        <span class="tag">3D CAD Modelling</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-cat-label">Embedded Systems</div>
+      <div class="skill-tags">
+        <span class="tag">Arduino</span>
+        <span class="tag">Raspberry Pi</span>
+        <span class="tag">ESP32</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-cat-label">Programming</div>
+      <div class="skill-tags">
+        <span class="tag">Python</span>
+        <span class="tag">C / C++</span>
+        <span class="tag">MATLAB</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-cat-label">Tools & Software</div>
+      <div class="skill-tags">
+        <span class="tag">KiCad</span>
+        <span class="tag">Altium</span>
+        <span class="tag">OnShape</span>
+        <span class="tag">Git</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">03 — Experience</div>
+  <h2 class="section-title">All the Places Where I've<br><em>worked & learned</em></h2>
+  <div class="exp-list">
+    <div class="exp-item">
+      <div class="exp-date"> Sep 2025 - Dec 2025 </div>
+      <div class="exp-content">
+        <div class="exp-role">ExxonMobil Canada Energy</div>
+        <div class="exp-company">Risk and Operations Integrity Engineering Assitant</div>
+        <p class="exp-desc">•	Verified and validated Critical Safeguards (CSGs) for the Hebron and Hibernia projects, ensuring alignment with equipment identification, maintenance compliance, and process safety requirements
+•	Prepared and presented technical documentation, findings and project results to upper management
+•	Interfaced with Certifying Authority to support compliance and Management of Change (MOC) documentation
+•	Designed and automated a Smartsheet-based personnel hours tracking system, improving reporting efficiency </p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">Jan 2025 - May 2025</div>
+      <div class="exp-content">
+        <div class="exp-role"> Lakecrest Independent School </div>
+        <div class="exp-company">STEM Support Specialist </div>
+        <p class="exp-desc"> •	Led and mentored a student team in the design, build, and functional testing of an underwater ROV
+•	Soldered, powered, and troubleshot controller board, tested buoyancy and tether system reliability
+•	Developed detailed instructional manuals and lab guides to support training and ensure continuity for future teams </p>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">2022 — Present</div>
+      <div class="exp-content">
+        <div class="exp-role"> Outreach and Avionics </div>
+        <div class="exp-company"> Phoenix Aerospace </div>
+        <p class="exp-desc">•	Testing motors, assembling electronic components, and integrating circuitry for an RC aerial vehicle
+•	Conducting CFD Analysis using ANSYS to assist with mechanical design and manufacture
+•	Researching competition requirements and blueprints to obtain specifications, procedures, and objectives
+</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">04 — Projects</div>
+  <h2 class="section-title">Things I've<br><em>built</em></h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-num">01</div>
+      <div class="project-tag">Electrical Engineering Design (ECE 5000): Design Project </div>
+      <div class="project-title">Wall-Y: A Remote-controlled Car</div>
+      <p class="project-desc">Designed and built an ESP32 microcontroller-based remote-controlled car with wireless communication protocols and a custom PCB layout.</p>
+    </div>
+    <div class="project-card">
+      <div class="project-num">02</div>
+      <div class="project-tag">Personal Coding Project</div>
+      <div class="project-title">This website! </div>
+      <p class="project-desc">Developed a digital personal portfolio site to link to resumes, social medias and handouts.</p>
+    
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">05 — Contact</div>
+  <div class="contact-inner">
+    <div class="contact-text">
+      <h2 class="section-title">Let's<br><em>connect</em></h2>
+      <p>Open to internships, collaborations, and conversations about electrical engineering and beyond.</p>
+      <div class="quote-block">
+        <blockquote>"Way leads on to way. And I dwell in possibility."</blockquote>
+      </div>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:jtasnim@mun.ca" class="contact-link">
+        <div class="contact-link-icon">@</div>
+        <span class="contact-link-label">jtasnim@mun.ca</span>
+        <span class="contact-link-arrow">↗</span>
+      </a>
+      <a href="https://linkedin.com/in/jarintasnim" class="https://www.linkedin.com/feed/update/urn:li:activity:7409265097744785408/" target="_blank">
+        <div class="contact-link-icon">in</div>
+        <span class="contact-link-label">linkedin.com/in/jarintasnim</span>
+        <span class="contact-link-arrow">↗</span>
+      </a>
+      <a href="https://github.com/jarintasnim" class="contact-link" target="_blank">
+        <div class="contact-link-icon">gh</div>
+        <span class="contact-link-label">github.com/tasnimt30</span>
+        <span class="contact-link-arrow">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-name">Jarin Tasnim</div>
+  <div class="footer-copy">© 2026 </div>
+</footer>
+
+</body>
+</html>
