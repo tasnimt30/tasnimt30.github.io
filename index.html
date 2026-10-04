@@ -171,19 +171,25 @@
   }
 
   /* EXPERIENCE */
+  .exp-group-label {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold);
+    padding: 3rem 0 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .exp-group-label:first-child { padding-top: 0; }
   .exp-list { display: flex; flex-direction: column; gap: 0; }
   .exp-item {
     display: grid; grid-template-columns: 160px 1fr;
     gap: 2rem; padding: 2rem 0;
     border-bottom: 1px solid rgba(201,169,110,0.12);
   }
-  .exp-item:first-child { padding-top: 0; }
   .exp-date {
     font-family: 'DM Mono', monospace; font-size: 0.65rem;
     letter-spacing: 0.1em; color: var(--muted);
     padding-top: 0.2rem;
   }
-  .exp-content {}
   .exp-role {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.35rem; font-weight: 400; color: #F2EAD8;
@@ -194,7 +200,15 @@
     letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--gold); margin-bottom: 0.8rem;
   }
-  .exp-desc { font-size: 0.88rem; line-height: 1.8; color: #888; font-weight: 300; }
+  .exp-desc { list-style: none; }
+  .exp-desc li {
+    position: relative; padding-left: 1.1rem; margin-bottom: 0.45rem;
+    font-size: 0.88rem; line-height: 1.8; color: #888; font-weight: 300;
+  }
+  .exp-desc li::before {
+    content: ''; position: absolute; left: 0; top: 0.85em;
+    width: 5px; height: 1px; background: var(--gold);
+  }
 
   /* PROJECTS */
   .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
@@ -275,6 +289,42 @@
     font-family: 'DM Mono', monospace; font-size: 0.6rem;
     letter-spacing: 0.12em; color: #444;
   }
+
+
+  /* HOBBIES */
+  .hobby-card {
+    border: 1px solid var(--border); background: var(--dark2);
+    padding: 2rem; position: relative; overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .hobby-card:hover { transform: translateY(-4px); border-color: rgba(201,169,110,0.5); }
+  .hobby-icon {
+    font-family: 'Cormorant Garamond', serif; font-size: 2rem;
+    color: var(--gold); line-height: 1; margin-bottom: 1rem;
+  }
+
+  /* RESUME */
+  .resume-box {
+    display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center;
+    border: 1px solid var(--border); background: var(--dark2); padding: 3rem;
+  }
+  .resume-text { font-size: 0.95rem; line-height: 1.9; color: #888; font-weight: 300; max-width: 460px; }
+  .resume-actions { display: flex; flex-direction: column; gap: 1.2rem; align-items: flex-start; }
+  .resume-view {
+    font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.3s;
+  }
+  .resume-view:hover { color: var(--gold); }
+
+  /* MOBILE */
+  @media (max-width: 800px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { gap: 0.8rem; flex-wrap: wrap; justify-content: flex-end; }
+    .resume-box { grid-template-columns: 1fr; padding: 2rem; gap: 2rem; }
+    .hero, section, footer { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .about-grid, .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+  }
 </style>
 </head>
 <body>
@@ -286,6 +336,8 @@
     <li><a href="#skills">Skills</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
+    <li><a href="#hobbies">Hobbies</a></li>
+    <li><a href="#resume">Resume</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -309,7 +361,7 @@
     <div class="about-text">
       <h2 class="section-title">Engineer by training,<br><em>thinker</em> by nature</h2>
       <p>
-        Welcome to my personal portfolio website! I'm <strong>Jarin Tasnim</strong>! I'm a third-year electrical engineering student at Memorial University of Newfoundland, and I love tinkering with my tools! I am passionate about all things within the art domain. I enjoy KiCAD, and occasionally coding!
+        Welcome to my personal portfolio website! I'm <strong>Jarin Tasnim</strong>! I'm a fourth-year electrical engineering co-op student at Memorial University of Newfoundland, and I love tinkering with my tools! I am passionate about all things within the art domain. I enjoy KiCAD, and occasionally coding!
       </p>
       <p>
         I'm beginning to dabble in personal projects, and have a wide variety of interests, some of which I'm sharing across this site. Please feel free to check some of my attachments out, and I would more than welcome any questions, comments or suggestions you might have!
@@ -319,6 +371,10 @@
       <div class="stat-item">
         <div class="stat-num">EE</div>
         <div class="stat-label">Electrical Engineering Major</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Co-op Work Terms Completed</div>
       </div>
       <div class="stat-item">
         <div class="stat-num">4+</div>
@@ -343,7 +399,7 @@
         <span class="tag">Analog Circuits</span>
         <span class="tag">PCB Design (KiCAD)</span>
         <span class="tag">SPICE Simulation</span>
-        <span class="tag">3D CAD Modelling</span>
+        <span class="tag">PSpice (OrCAD)</span>
       </div>
     </div>
     <div class="skill-category">
@@ -359,16 +415,50 @@
       <div class="skill-tags">
         <span class="tag">Python</span>
         <span class="tag">C / C++</span>
+        <span class="tag">HTML</span>
         <span class="tag">MATLAB</span>
       </div>
     </div>
     <div class="skill-category">
-      <div class="skill-cat-label">Tools & Software</div>
+      <div class="skill-cat-label">Industrial &amp; Process</div>
+      <div class="skill-tags">
+        <span class="tag">P&amp;IDs</span>
+        <span class="tag">Loop Diagrams</span>
+        <span class="tag">SPI</span>
+        <span class="tag">DCS / ICSS</span>
+        <span class="tag">SCADA</span>
+        <span class="tag">MOCs</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-cat-label">Design &amp; Fabrication</div>
+      <div class="skill-tags">
+        <span class="tag">3D CAD Modelling</span>
+        <span class="tag">OnShape</span>
+        <span class="tag">Fusion 360</span>
+        <span class="tag">ANSYS (CFD)</span>
+        <span class="tag">3D Printing</span>
+        <span class="tag">Soldering</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-cat-label">Tools &amp; Software</div>
       <div class="skill-tags">
         <span class="tag">KiCad</span>
         <span class="tag">Altium</span>
-        <span class="tag">OnShape</span>
         <span class="tag">Git</span>
+        <span class="tag">SAP (CMMS)</span>
+        <span class="tag">SEEQ</span>
+        <span class="tag">Tableau</span>
+        <span class="tag">Smartsheet</span>
+        <span class="tag">Bluebeam Revu</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-cat-label">Certifications</div>
+      <div class="skill-tags">
+        <span class="tag">Offshore Survival (OSI) with HUET-HUEBA</span>
+        <span class="tag">WHMIS</span>
       </div>
     </div>
   </div>
@@ -377,40 +467,267 @@
 <!-- EXPERIENCE -->
 <section id="experience">
   <div class="section-label">03 — Experience</div>
-  <h2 class="section-title">All the Places Where I've<br><em>worked & learned</em></h2>
+  <h2 class="section-title">All the Places Where I've<br><em>worked &amp; learned</em></h2>
   <div class="exp-list">
+
+    <div class="exp-group-label">Co-op &amp; Professional Experience</div>
+
     <div class="exp-item">
-      <div class="exp-date"> Sep 2025 - Dec 2025 </div>
+      <div class="exp-date">May 2026 – Aug 2026</div>
       <div class="exp-content">
-        <div class="exp-role">ExxonMobil Canada Energy</div>
-        <div class="exp-company">Risk and Operations Integrity Engineering Assitant</div>
-        <p class="exp-desc">•	Verified and validated Critical Safeguards (CSGs) for the Hebron and Hibernia projects, ensuring alignment with equipment identification, maintenance compliance, and process safety requirements
-•	Prepared and presented technical documentation, findings and project results to upper management
-•	Interfaced with Certifying Authority to support compliance and Management of Change (MOC) documentation
-•	Designed and automated a Smartsheet-based personnel hours tracking system, improving reporting efficiency </p>
+        <div class="exp-role">Surface (IC&amp;E) Engineering Assistant</div>
+        <div class="exp-company">ExxonMobil Canada Energy · St. John's, NL</div>
+        <ul class="exp-desc">
+          <li>Led a Multiphase Flow Meter (MPFM) pilot feasibility study for the Hibernia project</li>
+          <li>Coordinated with international vendors and business units to evaluate, assess, and present proposals to stakeholders</li>
+          <li>Analyzed well data using AIZE 3D Digital Twin, SEEQ, and Energy Connect to evaluate installation opportunities, identify integration constraints, and quantify economic value, resulting in a proposed pilot plan</li>
+          <li>Developed an initial HVAC Temporary Safe Refuge (TSR) pressure decay test plan for an upcoming maintenance campaign by mapping initiating causes, modeling volumes and sequencing damper logic</li>
+          <li>Authored MOC packages and work scopes and calculated instrument offsets to improve measurement precision</li>
+        </ul>
       </div>
     </div>
+
     <div class="exp-item">
-      <div class="exp-date">Jan 2025 - May 2025</div>
+      <div class="exp-date">May 2026 – Aug 2026</div>
       <div class="exp-content">
-        <div class="exp-role"> Lakecrest Independent School </div>
-        <div class="exp-company">STEM Support Specialist </div>
-        <p class="exp-desc"> •	Led and mentored a student team in the design, build, and functional testing of an underwater ROV
-•	Soldered, powered, and troubleshot controller board, tested buoyancy and tether system reliability
-•	Developed detailed instructional manuals and lab guides to support training and ensure continuity for future teams </p>
+        <div class="exp-role">Ocean Technology Student Assistant</div>
+        <div class="exp-company">School of Ocean Technology, Marine Institute · St. John's, NL</div>
+        <ul class="exp-desc">
+          <li>Assisted with planning and execution of public engagement events</li>
+          <li>Maintained and improved equipment inventory</li>
+        </ul>
       </div>
     </div>
+
     <div class="exp-item">
-      <div class="exp-date">2022 — Present</div>
+      <div class="exp-date">Sep 2025 – Dec 2025</div>
       <div class="exp-content">
-        <div class="exp-role"> Outreach and Avionics </div>
-        <div class="exp-company"> Phoenix Aerospace </div>
-        <p class="exp-desc">•	Testing motors, assembling electronic components, and integrating circuitry for an RC aerial vehicle
-•	Conducting CFD Analysis using ANSYS to assist with mechanical design and manufacture
-•	Researching competition requirements and blueprints to obtain specifications, procedures, and objectives
-</p>
+        <div class="exp-role">Risk &amp; Operations Integrity Engineering Assistant</div>
+        <div class="exp-company">ExxonMobil Canada Energy · St. John's, NL</div>
+        <ul class="exp-desc">
+          <li>Verified and validated Critical Safeguards (CSGs) for the Hebron and Hibernia projects using SAP and Excel, ensuring alignment with OIMS process safety, equipment identification, and maintenance compliance protocols</li>
+          <li>Prepared and presented assessment findings and compliance milestone updates to upper management</li>
+          <li>Designed and automated a Smartsheet-based personnel hours tracking system, improving reporting efficiency and visibility</li>
+          <li>Interfaced with the Certifying Authority to support regulatory compliance and Management of Change (MOC) documentation</li>
+        </ul>
       </div>
     </div>
+
+    <div class="exp-item">
+      <div class="exp-date">May 2025 – Aug 2025</div>
+      <div class="exp-content">
+        <div class="exp-role">Research Assistant</div>
+        <div class="exp-company">Faculty of Engineering and Applied Science, MUN · St. John's, NL</div>
+        <ul class="exp-desc">
+          <li>Researched multi-step numerical techniques for borehole heat exchangers</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">May 2025 – Aug 2025</div>
+      <div class="exp-content">
+        <div class="exp-role">Research Assistant</div>
+        <div class="exp-company">Department of Linguistics, MUN · St. John's, NL</div>
+        <ul class="exp-desc">
+          <li>Performed data collection, transcription, coding, and organization of qualitative and quantitative research data</li>
+          <li>Maintained structured spreadsheets for data entry and assisted with course and report preparation</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Jan 2025 – Apr 2025</div>
+      <div class="exp-content">
+        <div class="exp-role">STEM Support Specialist</div>
+        <div class="exp-company">Lakecrest Independent School · St. John's, NL</div>
+        <ul class="exp-desc">
+          <li>Planned, organized and managed a STEAM camp for 30 participants aged 5–15, and prepared and managed a budget report</li>
+          <li>Mentored students through hands-on STEAM activities involving Arduino Nano, Raspberry Pi, micro:bit, LEGO robotics, introductory coding, Minecraft, 3D modelling (TinkerCAD), and soldering</li>
+          <li>Developed, presented, and taught interactive workshops by adapting technical content to diverse age and skill levels</li>
+          <li>Troubleshot laboratory apparatus, sensor setups, and technical equipment to support faculty curriculum delivery</li>
+          <li>Led a student team in the design, build, and testing of an underwater ROV, and wrote instructional manuals and lab guides for future teams</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Jan 2024 – Present</div>
+      <div class="exp-content">
+        <div class="exp-role">Teaching Fellow &amp; Student Ambassador</div>
+        <div class="exp-company">How to Change the World</div>
+        <ul class="exp-desc">
+          <li>Leading global student cohorts and judges across international bootcamps and courses centered on UN Sustainable Development Goals</li>
+          <li>Guiding teams through application of program concepts, frameworks and tools to solve challenges</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-group-label">Design Teams, Competitions &amp; Leadership</div>
+
+    <div class="exp-item">
+      <div class="exp-date">May 2025 – Jul 2026</div>
+      <div class="exp-content">
+        <div class="exp-role">Judge &amp; Mentor</div>
+        <div class="exp-company">MATE Remotely Operated Vehicle (ROV) Competition</div>
+        <ul class="exp-desc">
+          <li>Served as a judge for the Regional and World Championship</li>
+          <li>Mentored a student team through design, fabrication, testing, and deployment of a functional underwater ROV</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Mar 2025 – Jun 2026</div>
+      <div class="exp-content">
+        <div class="exp-role">Avionics &amp; Outreach Lead</div>
+        <div class="exp-company">MUN Engineering: Phoenix Aerospace Student Design Team</div>
+        <ul class="exp-desc">
+          <li>Tested motors, assembled electronic components, and integrated circuitry for an RC aerial vehicle</li>
+          <li>Conducted CFD analysis using ANSYS to assist with mechanical design and manufacture</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Mar 2025 – Mar 2026</div>
+      <div class="exp-content">
+        <div class="exp-role">Electronics Personnel</div>
+        <div class="exp-company">MUN Engineering: BAJA Student Design Team</div>
+        <ul class="exp-desc">
+          <li>Designed, modelled and built circuits and electronic systems for the BAJA race buggy to optimize the drive process</li>
+          <li>Assembled and tested hardware, including soldering PCBs and sensor integration, to provide real-time data to the driver</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">May 2024 – May 2026</div>
+      <div class="exp-content">
+        <div class="exp-role">Outreach Coordinator</div>
+        <div class="exp-company">World University Service of Canada (WUSC) · St. John's, NL</div>
+        <ul class="exp-desc">
+          <li>Served WUSC's mission at MUN, promoting inclusive global education and youth empowerment programs</li>
+          <li>Organized and coordinated committee events and fundraising initiatives by developing promotional materials</li>
+          <li>Participated in national training conferences, workshops and webinars to raise awareness for flagship programs</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-group-label">Volunteer Experience</div>
+
+    <div class="exp-item">
+      <div class="exp-date">Oct 2025 – Aug 2026</div>
+      <div class="exp-content">
+        <div class="exp-role">United Way Newfoundland and Labrador</div>
+        <div class="exp-company">Volunteer</div>
+        <ul class="exp-desc">
+          <li>Participated in various corporate fundraising campaigns</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Jul 2026</div>
+      <div class="exp-content">
+        <div class="exp-role">Easter Seals Newfoundland &amp; Labrador</div>
+        <div class="exp-company">Volunteer</div>
+        <ul class="exp-desc">
+          <li>Supported inclusive community programming and activities for children and youth with disabilities</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Jun 2026</div>
+      <div class="exp-content">
+        <div class="exp-role">PRIDE (People for Respect, Inclusion and Diversity of Employees)</div>
+        <div class="exp-company">ExxonMobil Canada East</div>
+        <ul class="exp-desc">
+          <li>Coordinated event deliverables and milestone tracking for corporate PRIDE month initiatives, including the kickoff and flagship events</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Sep 2025 – Aug 2026</div>
+      <div class="exp-content">
+        <div class="exp-role">ONE</div>
+        <div class="exp-company">ExxonMobil Canada East</div>
+        <ul class="exp-desc">
+          <li>Engaged in networking with leadership and cross-regional professional development initiatives</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Dec 2025</div>
+      <div class="exp-content">
+        <div class="exp-role">Single Parent Association of Newfoundland and Labrador (SPANL)</div>
+        <div class="exp-company">Volunteer</div>
+        <ul class="exp-desc">
+          <li>Arranged, sorted and distributed gifts for SPANL's Christmas Magic program to deliver gifts to local youth</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Apr 2025</div>
+      <div class="exp-content">
+        <div class="exp-role">Let's Talk Science</div>
+        <div class="exp-company">Volunteer</div>
+        <ul class="exp-desc">
+          <li>Directed 350+ students from 15+ schools to designated booths and faculties, and led a guided tour through the Engineering faculty</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Dec 2023</div>
+      <div class="exp-content">
+        <div class="exp-role">SMILE Committee: In-patient Student Team for Childhood Cancer Patients</div>
+        <div class="exp-company">Volunteer</div>
+        <ul class="exp-desc">
+          <li>Coordinated logistics among suppliers, organizers, photographers, PR and treasury teams to support events and activities</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">Nov 2023</div>
+      <div class="exp-content">
+        <div class="exp-role">Mental Health Awareness Project (Action Team)</div>
+        <div class="exp-company">Volunteer</div>
+        <ul class="exp-desc">
+          <li>Engaged booth visitors to raise awareness about introducing and implementing more effective habits for better mental health</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-group-label">Awards &amp; Honors</div>
+
+    <div class="exp-item">
+      <div class="exp-date">2022</div>
+      <div class="exp-content">
+        <div class="exp-role">High School Valedictorian</div>
+        <div class="exp-company">Awards</div>
+        <ul class="exp-desc">
+          <li>Graduated as valedictorian</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">2022</div>
+      <div class="exp-content">
+        <div class="exp-role">Pearson High Achiever</div>
+        <div class="exp-company">Awards</div>
+        <ul class="exp-desc">
+          <li>Recognized as a Pearson High Achiever</li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -421,23 +738,105 @@
   <div class="projects-grid">
     <div class="project-card">
       <div class="project-num">01</div>
-      <div class="project-tag">Electrical Engineering Design (ECE 5000): Design Project </div>
+      <div class="project-tag">Electrical Engineering Design (ECE 5000) · Apr 2025</div>
       <div class="project-title">Wall-Y: A Remote-controlled Car</div>
-      <p class="project-desc">Designed and built an ESP32 microcontroller-based remote-controlled car with wireless communication protocols and a custom PCB layout.</p>
+      <p class="project-desc">Designed, modeled and built a functioning remote controller for a remote-controlled car using an ESP32, with wireless communication and a custom PCB layout.</p>
     </div>
     <div class="project-card">
       <div class="project-num">02</div>
+      <div class="project-tag">ExxonMobil Canada · Surface Engineering · 2026</div>
+      <div class="project-title">MPFM Pilot Feasibility Study</div>
+      <p class="project-desc">Led a feasibility study on Multiphase Flow Meters for Hibernia, analyzing well data to quantify economic value and propose a pilot plan.</p>
+    </div>
+    <div class="project-card">
+      <div class="project-num">03</div>
+      <div class="project-tag">Accessibility · Mar 2024</div>
+      <div class="project-title">Arduino-based Visual Color Detector</div>
+      <p class="project-desc">Programmed a system to identify and announce colours and shades for visually impaired users, with an OLED screen and audio output to enhance accessibility.</p>
+    </div>
+    <div class="project-card">
+      <div class="project-num">04</div>
+      <div class="project-tag">CAD Design · Aug 2024</div>
+      <div class="project-title">Office Workspace Design Model</div>
+      <p class="project-desc">Designed, modeled and presented an ergonomic workspace in OnShape, compliant with Canadian building regulations.</p>
+    </div>
+    <div class="project-card">
+      <div class="project-num">05</div>
+      <div class="project-tag">Sustainability · Apr 2024</div>
+      <div class="project-title">Global Sustainability Bootcamp</div>
+      <p class="project-desc">Developed implementable strategies for the UN Sustainable Development Goals using root cause failure analysis, stakeholder mapping and solution prototyping, then presented at a global showcase.</p>
+    </div>
+    <div class="project-card">
+      <div class="project-num">06</div>
       <div class="project-tag">Personal Coding Project</div>
-      <div class="project-title">This website! </div>
+      <div class="project-title">This website!</div>
       <p class="project-desc">Developed a digital personal portfolio site to link to resumes, social medias and handouts.</p>
-    
+    </div>
+  </div>
+</section>
+
+<!-- HOBBIES -->
+<section id="hobbies">
+  <div class="section-label">05 — Beyond Engineering</div>
+  <h2 class="section-title">Adventures &amp;<br><em>hobbies</em></h2>
+  <div class="projects-grid">
+    <div class="hobby-card">
+      <div class="hobby-icon">◐</div>
+      <div class="project-tag">Creative</div>
+      <div class="project-title">Art &amp; Design</div>
+      <p class="project-desc">Anything in the art domain pulls me in. It is the side of my brain that engineering never quite satisfies. <!-- EDIT: add your own art/media --></p>
+    </div>
+    <div class="hobby-card">
+      <div class="hobby-icon">◉</div>
+      <div class="project-tag">Photography</div>
+      <div class="project-title">Through the Lens</div>
+      <p class="project-desc">Chasing good light and small details, from the city to the coast. <!-- EDIT: add photos or an album link --></p>
+    </div>
+    <div class="hobby-card">
+      <div class="hobby-icon">△</div>
+      <div class="project-tag">Adventures</div>
+      <div class="project-title">Newfoundland &amp; Beyond</div>
+      <p class="project-desc">Trails, coastlines and weekend escapes whenever I can fit them in. <!-- EDIT: favourite hikes, trips, bucket list --></p>
+    </div>
+    <div class="hobby-card">
+      <div class="hobby-icon">◇</div>
+      <div class="project-tag">Movement</div>
+      <div class="project-title">Fitness</div>
+      <p class="project-desc">Building a consistent home workout routine, one session at a time. <!-- EDIT: sports, classes, goals --></p>
+    </div>
+    <div class="hobby-card">
+      <div class="hobby-icon">✦</div>
+      <div class="project-tag">Making</div>
+      <div class="project-title">Tinkering</div>
+      <p class="project-desc">Soldering, KiCad layouts and 3D prints, plus the occasional odd little gadget. <!-- EDIT: side projects --></p>
+    </div>
+    <div class="hobby-card">
+      <div class="hobby-icon">✎</div>
+      <div class="project-tag">Something Quirky</div>
+      <div class="project-title">Your Fun Fact Here</div>
+      <p class="project-desc">Add a hobby, collection, or talent that surprises people. <!-- EDIT: replace this card --></p>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME -->
+<section id="resume">
+  <div class="section-label">06 — Resume</div>
+  <div class="resume-box">
+    <div>
+      <h2 class="section-title" style="margin-bottom:1rem">Take my<br><em>resume</em> with you</h2>
+      <p class="resume-text">A one-stop summary of my education, co-op terms, projects, volunteering and skills, as a two-page PDF.</p>
+    </div>
+    <div class="resume-actions">
+      <a href="Jarin_Tasnim_Resume.pdf" download="Jarin_Tasnim_Resume.pdf" class="hero-cta">Download PDF <span class="arrow">↓</span></a>
+      <a href="Jarin_Tasnim_Resume.pdf" target="_blank" rel="noopener" class="resume-view">View in browser ↗</a>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-  <div class="section-label">05 — Contact</div>
+  <div class="section-label">07 — Contact</div>
   <div class="contact-inner">
     <div class="contact-text">
       <h2 class="section-title">Let's<br><em>connect</em></h2>
@@ -452,14 +851,14 @@
         <span class="contact-link-label">jtasnim@mun.ca</span>
         <span class="contact-link-arrow">↗</span>
       </a>
-      <a href="https://linkedin.com/in/jarintasnim" class="https://www.linkedin.com/feed/update/urn:li:activity:7409265097744785408/" target="_blank">
+      <a href="https://linkedin.com/in/jarintasnim" class="contact-link" target="_blank" rel="noopener">
         <div class="contact-link-icon">in</div>
         <span class="contact-link-label">linkedin.com/in/jarintasnim</span>
         <span class="contact-link-arrow">↗</span>
       </a>
-      <a href="https://github.com/jarintasnim" class="contact-link" target="_blank">
+      <a href="https://github.com/jarintasnim" class="contact-link" target="_blank" rel="noopener">
         <div class="contact-link-icon">gh</div>
-        <span class="contact-link-label">github.com/tasnimt30</span>
+        <span class="contact-link-label">github.com/jarintasnim</span>
         <span class="contact-link-arrow">↗</span>
       </a>
     </div>
@@ -468,7 +867,7 @@
 
 <footer>
   <div class="footer-name">Jarin Tasnim</div>
-  <div class="footer-copy">© 2026 </div>
+  <div class="footer-copy">© 2026</div>
 </footer>
 
 </body>
